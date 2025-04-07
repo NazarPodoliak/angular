@@ -1,0 +1,39 @@
+<mat-card class="mb-4 p-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl shadow-lg">
+  <div class="flex justify-between items-center">
+    <!-- 🔽 Sort By Dropdown -->
+    <div>
+      <button mat-button [matMenuTriggerFor]="sortByMenu" class="text-lg font-semibold transition hover:scale-105">
+        Sort by {{ sort }}
+        <mat-icon class="ml-1">expand_more</mat-icon>
+      </button>
+      <mat-menu #sortByMenu="matMenu">
+        <button (click)="onSortUpdated('desc')" mat-menu-item>Descending</button>
+        <button (click)="onSortUpdated('asc')" mat-menu-item>Ascending</button>
+      </mat-menu>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <div>
+        <button mat-button [matMenuTriggerFor]="menu" class="text-lg font-semibold transition hover:scale-105">
+          Show {{ itemsShowCount }}
+          <mat-icon class="ml-1">expand_more</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="onItemsUpdated(12)" mat-menu-item>12 items</button>
+          <button (click)="onItemsUpdated(24)" mat-menu-item>24 items</button>
+          <button (click)="onItemsUpdated(36)" mat-menu-item>36 items</button>
+        </mat-menu>
+      </div>
+
+      <button (click)="onColumnsUpdated(1)" class="bg-white/20 p-2 rounded-full hover:bg-white/30 transition">
+        <mat-icon class="text-white text-2xl">view_list</mat-icon>
+      </button>
+      <button (click)="onColumnsUpdated(3)" class="bg-white/20 p-2 rounded-full hover:bg-white/30 transition">
+        <mat-icon class="text-white text-2xl">view_module</mat-icon>
+      </button>
+      <button (click)="onColumnsUpdated(4)" class="bg-white/20 p-2 rounded-full hover:bg-white/30 transition">
+        <mat-icon class="text-white text-2xl">view_comfy</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>

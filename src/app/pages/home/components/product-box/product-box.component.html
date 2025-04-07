@@ -1,0 +1,41 @@
+<mat-card
+  *ngIf="product"
+  class="relative overflow-hidden rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl border border-gray-200 bg-white"
+>
+  <!-- 📸 Product Image -->
+  <div [ngClass]="{ 'flex': fullWidthMode }">
+    <img
+      class="mb-2 mx-auto object-cover rounded-t-xl transition-opacity hover:opacity-90"
+      [ngClass]="{ 'h-[200px] w-full': !fullWidthMode, 'h-[360px] w-1/2': fullWidthMode }"
+      [src]="product.image"
+      alt="{{ product.title }}"
+    />
+
+    <!-- 📝 Product Details -->
+    <div class="w-full p-4" [ngClass]="{ 'px-8 flex flex-col justify-between': fullWidthMode }">
+      <div>
+        <h5 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{{ product.category }}</h5>
+        <p
+          class="truncate text-lg font-bold text-gray-900 hover:whitespace-normal transition"
+          [ngClass]="{ truncate: !fullWidthMode }"
+        >
+          {{ product.title }}
+        </p>
+        <p *ngIf="fullWidthMode" class="text-gray-600 text-sm mt-2">
+          {{ product.description }}
+        </p>
+      </div>
+
+      <!-- 💰 Price & Add to Cart -->
+      <div class="flex justify-between items-center mt-4">
+        <span class="text-xl font-semibold text-red-500">{{ product.price | currency }}</span>
+        <button
+          (click)="onAddToCart()"
+          class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-md transition-all hover:scale-110 hover:shadow-lg"
+        >
+          <mat-icon class="text-white">shopping_cart</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,101 @@
+<!-- Main Container -->
+<div class="min-h-screen bg-gray-50">
+  <!-- Header Section -->
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-gray-900">Shopping Store</h1>
+        <div class="flex items-center space-x-4">
+          <button class="p-2 rounded-full hover:bg-gray-100">
+            <mat-icon class="text-gray-600">search</mat-icon>
+          </button>
+          <button class="p-2 rounded-full hover:bg-gray-100">
+            <mat-icon class="text-gray-600">shopping_cart</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Filters Sidebar -->
+      <aside class="lg:w-64 flex-shrink-0">
+        <div class="bg-white rounded-lg shadow-sm p-6 sticky top-8">
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Filters</h2>
+          <app-filters (showCategory)="onShowCategory($event)"></app-filters>
+        </div>
+      </aside>
+
+      <!-- Products Section -->
+      <main class="flex-1">
+        <!-- Products Header -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <app-products-header
+            (columnsCountChange)="onColumnsCountChange($event)"
+            (itemsCountChange)="onItemsCountChange($event)"
+            (sortChange)="onSortChange($event)"
+          ></app-products-header>
+        </div>
+
+        <!-- Products Grid -->
+        <div *ngIf="products?.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div *ngFor="let product of products" class="transform transition-all duration-300 hover:scale-105">
+            <mat-card class="h-full bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden border border-gray-100">
+              <div
+                (addToCart)="onAddToCart($event)"
+                app-product-box
+                [product]="product"
+                [fullWidthMode]="cols === 1"
+                class="h-full"
+              ></div>
+            </mat-card>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!products?.length" class="bg-white rounded-lg shadow-sm p-12 text-center">
+          <img
+            src="assets/images/empty-box.svg"
+            alt="No Products"
+            class="w-32 mx-auto opacity-75 animate-bounce mb-4"
+          />
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">No Products Found</h3>
+          <p class="text-gray-600">Try adjusting your filters or browse a different category</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">About Us</h3>
+          <p class="text-gray-600">Your trusted source for quality products at great prices.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-600 hover:text-gray-900">Home</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900">Products</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900">Categories</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact</h3>
+          <ul class="space-y-2">
+            <li class="text-gray-600">Email: support@store.com</li>
+            <li class="text-gray-600">Phone: (555) 123-4567</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t text-center text-gray-600">
+        <p>&copy; 2025 Shopping Store. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+

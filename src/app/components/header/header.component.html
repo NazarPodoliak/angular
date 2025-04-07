@@ -1,0 +1,48 @@
+<mat-toolbar class="justify-between max-w-7xl mx-auto border-x p-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg">
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="relative hover:bg-white/20 rounded-full p-2 transition">
+    <mat-icon
+      [matBadge]="itemsQuantity"
+      [matBadgeHidden]="!itemsQuantity"
+      matBadgeColor="warn"
+      class="text-white text-3xl"
+    >
+      shopping_cart
+    </mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu" class="rounded-lg shadow-xl border bg-white">
+    <div class="p-4 divide-y divide-gray-200">
+      <div class="pb-3 flex justify-between items-center">
+        <span class="text-lg font-semibold text-gray-700">{{ cart.items.length }} items</span>
+        <a routerLink="cart" class="text-blue-500 hover:underline">View Cart</a>
+      </div>
+
+      <div *ngIf="cart.items.length" class="py-3">
+        <div *ngFor="let item of cart.items" class="flex justify-between text-gray-600 font-medium mb-2">
+          {{ item.name }} x {{ item.quantity }}
+          <span class="font-bold text-gray-900">{{ item.price | currency }}</span>
+        </div>
+      </div>
+
+      <div class="flex justify-between py-3 text-gray-700 font-medium">
+        Total:
+        <span class="font-bold text-xl text-gray-900">{{ getTotal(cart.items) | currency }}</span>
+      </div>
+
+      <div class="pt-3 flex justify-between">
+        <button
+          (click)="onClearCart()"
+          class="bg-red-500 hover:bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center transition"
+        >
+          <mat-icon>remove_shopping_cart</mat-icon>
+        </button>
+        <button
+          routerLink="cart"
+          class="bg-green-500 hover:bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center transition"
+        >
+          <mat-icon>shopping_cart_checkout</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-menu>
+</mat-toolbar>
