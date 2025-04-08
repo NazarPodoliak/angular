@@ -66,7 +66,7 @@ const PRODUCTS: Array<Product> = [
     price: 39.99,
     description: 'Ergonomic wireless mouse with precision tracking',
     category: 'electronics',
-    image: 'https://images.pexels.com/photos/33999/pexels-photo.jpg',
+    image: 'https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg',
   }
 ];
 
